@@ -4,7 +4,8 @@ using Fuksi.VK.Services.Interfaces;
 using VkNet;
 using VkNet.Abstractions;
 using VkNet.Model;
-using Fuksi.Common.Queue.DI;   
+using Fuksi.Common.Queue.DI;
+using Fuksi.VK.Services.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IVkApiService, VkApiService>();
+builder.Services.AddTransient<CanWriteToUserConsumer>();
 builder.Services.AddRabbitMq("host=127.0.0.1:5672;publisherConfirms=true;username=guest;password=guest;requestedHeartbeat=3600");
 builder.Services.AddScoped<IVkApi>(provider =>
 {
@@ -27,7 +29,6 @@ builder.Services.AddScoped<IVkApi>(provider =>
 
     return vkApi;
 });
-await builder.Services.AddCallbackServerIfNecessary();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,5 +43,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+await app.AddCallbackServerIfNecessary();
 
 app.Run();

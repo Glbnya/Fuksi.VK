@@ -16,4 +16,9 @@
     <PackageReference Include="VkNet" Version="1.75.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\fuksi-common\Fuksi.Common.Queue\Fuksi.Common.Queue.csproj" />
+    <ProjectReference Include="..\Fuksi.VkContracts\Fuksi.VkContracts.csproj" />
+  </ItemGroup>
+
 </Project>

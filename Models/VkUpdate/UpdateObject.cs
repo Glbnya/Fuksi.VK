@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Fuksi.VK.Models
+namespace Fuksi.VK.Models.VkUpdate
 {
     public class UpdateObject
     {

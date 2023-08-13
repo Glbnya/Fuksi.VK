@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace Fuksi.VK.Models
+namespace Fuksi.VK.Models.VkUpdate
 {
     public class Update
     {

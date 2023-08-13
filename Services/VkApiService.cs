@@ -1,11 +1,9 @@
-﻿using Fuksi.VK.Models;
-using Fuksi.VK.Services.Interfaces;
-using VkNet;
+﻿using Fuksi.VK.Services.Interfaces;
 using VkNet.Abstractions;
-using VkNet.Model;
 using Fuksi.Common.Queue;
 using Fuksi.Common.Queue.Abstractions;
-using Fuksi.VK.Models.Membership;
+using Fuksi.VkContracts;
+using Fuksi.VK.Models.VkUpdate;
 
 namespace Fuksi.VK.Services
 {
@@ -18,23 +16,39 @@ namespace Fuksi.VK.Services
             _vkApi = vkApi;
             _eventQueue = eventQueue;
         }
-        public async Task<bool> CanWriteToUser(ulong userId, ulong groupId)
+        public async Task TryMessageUserAsync(long userId, string message)
         {
-            return await _vkApi.Messages.IsMessagesFromGroupAllowedAsync(userId, groupId);
+            if (await CanWriteToUser((ulong)userId, 221861505))
+            {
+                await _vkApi.Messages.SendAsync(
+                new VkNet.Model.MessagesSendParams
+                {
+                    UserId = userId,
+                    GroupId = 221861505,
+                    Message = message
+                }
+                );
+            }
+
         }
 
-        public async Task UserFuksiMembership(Update update)
+        public async Task HandleUserAction(Update update)
         {
-            await _eventQueue.Publish(new MembershipStatus
+            await _eventQueue.Publish(new UserAction
             {
                 VkUserId = update.Object.UserId,
 
                 Status = update.Type
-            }, 
-            
+            },
+
             new PublishMessageInfo());
 
-            return Task.CompletedTask;
         }
+        #region Helpers
+        public async Task<bool> CanWriteToUser(ulong userId, ulong groupId)
+        {
+            return await _vkApi.Messages.IsMessagesFromGroupAllowedAsync(userId, groupId);
+        }
+        #endregion
     }
 }
