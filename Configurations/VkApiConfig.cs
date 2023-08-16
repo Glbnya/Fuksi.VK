@@ -1,12 +1,15 @@
-﻿using VkNet.Abstractions;
+﻿using Fuksi.VK.Models;
+using Microsoft.Extensions.Options;
+using VkNet.Abstractions;
 using VkNet.Model;
 
 namespace Fuksi.VK.Configurations
 {
     public static class VkApiConfig
     {
-        public async static Task AddCallbackServerIfNecessary(this IApplicationBuilder builder)
+        public async static Task AddCallbackServerIfNecessary(this IApplicationBuilder builder, Settings settings)
         {
+
             var scope = builder.ApplicationServices.CreateScope();
 
             var vkApi = scope.ServiceProvider.GetService<IVkApi>();
@@ -15,7 +18,7 @@ namespace Fuksi.VK.Configurations
 
             if (connectedServers.Count == 0)
             {
-                var server = await vkApi.Groups.AddCallbackServerAsync(221861505, "https://2e8b-46-0-52-29.ngrok-free.app/Callback", "fuksibot", "");
+                var server = await vkApi.Groups.AddCallbackServerAsync(settings.GroupId, settings.CallbackUrl, "fuksibot", "");
 
                 await vkApi.Groups.SetCallbackSettingsAsync(
                     new CallbackServerParams

@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\fuksi-common\Fuksi.Common.Queue\Fuksi.Common.Queue.csproj" />
     <ProjectReference Include="..\Fuksi.VkContracts\Fuksi.VkContracts.csproj" />
   </ItemGroup>
 

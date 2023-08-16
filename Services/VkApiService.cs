@@ -25,7 +25,8 @@ namespace Fuksi.VK.Services
                 {
                     UserId = userId,
                     GroupId = 221861505,
-                    Message = message
+                    Message = message,
+                    RandomId = 123123321  //ругается, пока оставлю так
                 }
                 );
             }
@@ -47,7 +48,8 @@ namespace Fuksi.VK.Services
         #region Helpers
         public async Task<bool> CanWriteToUser(ulong userId, ulong groupId)
         {
-            return await _vkApi.Messages.IsMessagesFromGroupAllowedAsync(userId, groupId);
+            var result =  await _vkApi.Messages.IsMessagesFromGroupAllowedAsync(userId, groupId);
+            return result;
         }
         #endregion
     }

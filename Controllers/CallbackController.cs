@@ -3,6 +3,8 @@ using Fuksi.VK.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using VkNet.Abstractions;
 using Fuksi.VK.Models.VkUpdate;
+using Fuksi.VK.Models;
+using Microsoft.Extensions.Options;
 
 namespace Fuksi.VK.Controllers
 {
@@ -10,11 +12,13 @@ namespace Fuksi.VK.Controllers
     [ApiController]
     public class CallbackController : ControllerBase
     {
+        private readonly Settings _settings;
         private readonly IConfiguration _configuration;
         private readonly IVkApiService _vkApiService;
         private readonly IVkApi _vkApi;
-        public CallbackController(IConfiguration configuration, IVkApiService vkApiService, IVkApi vkApi)
+        public CallbackController(IConfiguration configuration, IVkApiService vkApiService, IVkApi vkApi, IOptions<Settings> settings)
         {
+            _settings = settings.Value;
             _configuration = configuration;
             _vkApiService = vkApiService;
             _vkApi = vkApi;
@@ -26,10 +30,11 @@ namespace Fuksi.VK.Controllers
             switch (update.Type)
             {
                 case CallbackType.Confirmation:
-                    var code = await _vkApi.Groups.GetCallbackConfirmationCodeAsync(221861505);
+                    var code = await _vkApi.Groups.GetCallbackConfirmationCodeAsync(_settings.GroupId);
                     return Ok(code);
                 default:
-                    await _vkApiService.HandleUserAction(update);
+                    //await _vkApiService.HandleUserAction(update);
+                    await _vkApiService.TryMessageUserAsync(66355935, "Привет!");
                     return Ok("ok");
             }
 

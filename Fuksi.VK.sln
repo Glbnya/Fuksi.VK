@@ -5,9 +5,7 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fuksi.VK", "Fuksi.VK.csproj", "{3BD21F93-01B6-42DB-9B49-C6B866866CC1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fuksi.Common.Queue", "..\fuksi-common\Fuksi.Common.Queue\Fuksi.Common.Queue.csproj", "{9806FC58-2833-48D3-9708-1C22AA42B7CF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fuksi.VkContracts", "..\Fuksi.VkContracts\Fuksi.VkContracts.csproj", "{861ECAFE-00C6-4E27-A1D3-73699C5BB239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fuksi.VkContracts", "..\Fuksi.VkContracts\Fuksi.VkContracts.csproj", "{861ECAFE-00C6-4E27-A1D3-73699C5BB239}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{3BD21F93-01B6-42DB-9B49-C6B866866CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BD21F93-01B6-42DB-9B49-C6B866866CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BD21F93-01B6-42DB-9B49-C6B866866CC1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9806FC58-2833-48D3-9708-1C22AA42B7CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9806FC58-2833-48D3-9708-1C22AA42B7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9806FC58-2833-48D3-9708-1C22AA42B7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9806FC58-2833-48D3-9708-1C22AA42B7CF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{861ECAFE-00C6-4E27-A1D3-73699C5BB239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{861ECAFE-00C6-4E27-A1D3-73699C5BB239}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{861ECAFE-00C6-4E27-A1D3-73699C5BB239}.Release|Any CPU.ActiveCfg = Release|Any CPU
